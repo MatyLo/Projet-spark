@@ -26,8 +26,8 @@ def main():
     #Méthode time
     start_transform_udf = time()
     df_scalaUDF = df.withColumn('category_name', addCategoryName(df["category"]))
-    #df.show()
-    df_scalaUDF.write.parquet("data/exo4/scala_udf_category_name_time.csv", mode="overwrite")
+    df.show()
+    #df_scalaUDF.write.parquet("data/exo4/scala_udf_category_name_time.csv", mode="overwrite")
     transform_udf_scala_time = time() - start_transform_udf
     print(f"Temps de transformation(time) (avec UDF scala) : {transform_udf_scala_time:.2f} secondes")
 
@@ -35,7 +35,7 @@ def main():
     print(f"Temps total avec time (avec UDF scala) : {total_time_udf_scala:.2f} secondes")
 
     #Méthode perf_counter
-    """debut_perf_counter2 = perf_counter()
+    debut_perf_counter2 = perf_counter()
     df = df.withColumn('category_name', addCategoryName(df["category"]))
     df.show()
     #df.write.parquet("data/exo4/scala_udf_category_name_perfcounter.csv", mode="overwrite")
@@ -43,7 +43,7 @@ def main():
     print(f"Temps de transformation (perfcounter) (avec UDF scala) : {transform_udf_scala_perfcounter:.2f} secondes")
 
     total_perfcounter_udf_scala = read_time + transform_udf_scala_perfcounter
-    print(f"Temps total avec perfcounter (avec UDF scala) : {total_perfcounter_udf_scala:.2f} secondes")"""
+    print(f"Temps total avec perfcounter (avec UDF scala) : {total_perfcounter_udf_scala:.2f} secondes")
 
 
     spark.stop()
