@@ -24,25 +24,26 @@ def main():
         return Column(add_category_name_udf.apply(_to_seq(sc, [col], _to_java_column)))
 
     #Méthode time
-    """start_transform_udf = time()
-    #debut_perf_counter = perf_counter()
-    df = df.withColumn('category_name', addCategoryName(df["category"]))
-    df.show()
-    #df.write.parquet("data/exo4/scala_udf_category_name.csv", mode="overwrite")
+    start_transform_udf = time()
+    df_scalaUDF = df.withColumn('category_name', addCategoryName(df["category"]))
+    #df.show()
+    df_scalaUDF.write.parquet("data/exo4/scala_udf_category_name_time.csv", mode="overwrite")
     transform_udf_scala_time = time() - start_transform_udf
-    #transform_udf_scala_time = time() - debut_perf_counter
-    print(f"Temps de transformation (avec UDF scala) : {transform_udf_scala_time:.2f} secondes")"""
-
-    #Méthode perf_counter
-    debut_perf_counter = perf_counter()
-    df = df.withColumn('category_name', addCategoryName(df["category"]))
-    df.show()
-    #df.write.parquet("data/exo4/scala_udf_category_name.csv", mode="overwrite")
-    transform_udf_scala_time = perf_counter() - debut_perf_counter
-    print(f"Temps de transformation (avec UDF scala) : {transform_udf_scala_time:.2f} secondes")
+    print(f"Temps de transformation(time) (avec UDF scala) : {transform_udf_scala_time:.2f} secondes")
 
     total_time_udf_scala = read_time + transform_udf_scala_time
-    print(f"Temps total (avec UDF scala) : {total_time_udf_scala:.2f} secondes")
+    print(f"Temps total avec time (avec UDF scala) : {total_time_udf_scala:.2f} secondes")
+
+    #Méthode perf_counter
+    """debut_perf_counter2 = perf_counter()
+    df = df.withColumn('category_name', addCategoryName(df["category"]))
+    df.show()
+    #df.write.parquet("data/exo4/scala_udf_category_name_perfcounter.csv", mode="overwrite")
+    transform_udf_scala_perfcounter = perf_counter() - debut_perf_counter2
+    print(f"Temps de transformation (perfcounter) (avec UDF scala) : {transform_udf_scala_perfcounter:.2f} secondes")
+
+    total_perfcounter_udf_scala = read_time + transform_udf_scala_perfcounter
+    print(f"Temps total avec perfcounter (avec UDF scala) : {total_perfcounter_udf_scala:.2f} secondes")"""
 
 
     spark.stop()

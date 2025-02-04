@@ -23,24 +23,27 @@ def main():
     df = df.withColumn("category", df["category"].cast(IntegerType()))
    
     #Méthode time
-    """start_transform_udf = time()
-    df = df.withColumn("category_name", addCategoryNameCol_udf(df["category"]))
-    df.show()
-    #df.write.parquet("data/exo4/python_udf_category_name.csv", mode="overwrite")
+    start_transform_udf = time()
+    df_pythonUDF = df.withColumn("category_name", addCategoryNameCol_udf(df["category"]))
+    #df.show()
+    df_pythonUDF.write.parquet("data/exo4/python_udf_category_name_time.csv", mode="overwrite")
     transform_udf_time = time() - start_transform_udf
-    print(f"Temps de transformation (avec UDF Python) : {transform_udf_time:.2f} secondes")"""
+    print(f"Temps de transformation (time) (avec UDF Python) : {transform_udf_time:.2f} secondes")
+
+    total_time_python_udf = read_time + transform_udf_time
+    print(f"Temps total avec time (avec UDF Python) : {total_time_python_udf:.2f} secondes")
 
     #Méthode perf-counter
-    debut_perf_counter = perf_counter()
+    """debut_perf_counter3 = perf_counter()
     df = df.withColumn("category_name", addCategoryNameCol_udf(df["category"]))
     df.show()
-    #df.write.parquet("data/exo4/python_udf_category_name.csv", mode="overwrite")
-    transform_udf_time = perf_counter() - debut_perf_counter
-    print(f"Temps de transformation (avec UDF Python) : {transform_udf_time:.2f} secondes")
+    #df.write.parquet("data/exo4/python_udf_category_name_perfcounter.csv", mode="overwrite")
+    transform_udf_perfcounter = perf_counter() - debut_perf_counter3
+    print(f"Temps de transformation (perfcounter) (avec UDF Python) : {transform_udf_perfcounter:.2f} secondes")
 
 
-    total_time_udf = read_time + transform_udf_time
-    print(f"Temps total (avec UDF Python) : {total_time_udf:.2f} secondes")
+    total_perfcounter_python_udf = read_time + transform_udf_perfcounter
+    print(f"Temps total avec perfcounter (avec UDF Python) : {total_perfcounter_python_udf:.2f} secondes")"""
 
 
     spark.stop()

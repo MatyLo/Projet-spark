@@ -20,10 +20,10 @@ class TestMain(unittest.TestCase):
         )
         expected = spark.createDataFrame(
             [
-                Row(name="Maty", age="25", zip="94270"),
-                Row(name="Anna", age="55", zip="20190"),
-                Row(name="Yvonne", age="18", zip="02100"),
-                Row(name="Yvonne", age="22", zip="02100"),
+                Row(naame="Maty", age="25", zip="94270"),
+                Row(naame="Anna", age="55", zip="20190"),
+                Row(naame="Yvonne", age="18", zip="02100"),
+                Row(naame="Yvonne", age="22", zip="02100"),
             ]
         )
 

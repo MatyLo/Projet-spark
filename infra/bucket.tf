@@ -1,5 +1,5 @@
-resource "aws_s3_bucket" "bucket" {
-  bucket = "my-bucket"
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-bucket-hu-angel"
 
   tags = local.tags
 }
